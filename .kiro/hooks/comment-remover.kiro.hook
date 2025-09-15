@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "name": "Comment Remover",
+  "description": "Automatically detects file changes and removes all types of comments (inline, block, JSDoc) from React, TypeScript, and Tailwind CSS files in the codebase",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "src/**/*.tsx",
+      "src/**/*.ts",
+      "src/**/*.js",
+      "src/**/*.jsx",
+      "**/*.css",
+      "**/*.scss",
+      "tailwind.config.ts",
+      "vite.config.ts",
+      "eslint.config.js",
+      "postcss.config.js"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the changed files and remove all comments including:\n- Single-line comments (// comment)\n- Multi-line block comments (/* comment */)\n- JSDoc comments (/** comment */)\n- Inline comments at end of lines\n- CSS comments (/* comment */)\n- Any other comment syntax\n\nRemove comments entirely while preserving all functional code, imports, exports, and logic. Maintain proper code formatting and structure. Focus only on comment removal without making any other code changes."
+  }
+}

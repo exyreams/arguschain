@@ -1,0 +1,241 @@
+import type { ContractConfig } from "./index";
+
+export const PYUSD_CONTRACT: ContractConfig = {
+  address: "0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
+  name: "PayPal USD",
+  symbol: "PYUSD",
+  decimals: 6,
+  type: "ERC20",
+  network: "mainnet",
+
+  functions: {
+    transfer: {
+      selector: "0xa9059cbb",
+      name: "transfer(address,uint256)",
+      paramTypes: ["address", "uint256"],
+      stateMutability: "nonpayable",
+      category: "transfer",
+    },
+    transferFrom: {
+      selector: "0x23b872dd",
+      name: "transferFrom(address,address,uint256)",
+      paramTypes: ["address", "address", "uint256"],
+      stateMutability: "nonpayable",
+      category: "transfer",
+    },
+    approve: {
+      selector: "0x095ea7b3",
+      name: "approve(address,uint256)",
+      paramTypes: ["address", "uint256"],
+      stateMutability: "nonpayable",
+      category: "approval",
+    },
+    balanceOf: {
+      selector: "0x70a08231",
+      name: "balanceOf(address)",
+      paramTypes: ["address"],
+      returnType: "uint256",
+      stateMutability: "view",
+      category: "view",
+    },
+    allowance: {
+      selector: "0xdd62ed3e",
+      name: "allowance(address,address)",
+      paramTypes: ["address", "address"],
+      returnType: "uint256",
+      stateMutability: "view",
+      category: "view",
+    },
+    totalSupply: {
+      selector: "0x18160ddd",
+      name: "totalSupply()",
+      paramTypes: [],
+      returnType: "uint256",
+      stateMutability: "view",
+      category: "view",
+    },
+
+    name: {
+      selector: "0x06fdde03",
+      name: "name()",
+      paramTypes: [],
+      returnType: "string",
+      stateMutability: "view",
+      category: "view",
+    },
+    symbol: {
+      selector: "0x95d89b41",
+      name: "symbol()",
+      paramTypes: [],
+      returnType: "string",
+      stateMutability: "view",
+      category: "view",
+    },
+    decimals: {
+      selector: "0x313ce567",
+      name: "decimals()",
+      paramTypes: [],
+      returnType: "uint8",
+      stateMutability: "view",
+      category: "view",
+    },
+
+    increaseAllowance: {
+      selector: "0x39509351",
+      name: "increaseAllowance(address,uint256)",
+      paramTypes: ["address", "uint256"],
+      stateMutability: "nonpayable",
+      category: "approval",
+    },
+    decreaseAllowance: {
+      selector: "0xa457c2d7",
+      name: "decreaseAllowance(address,uint256)",
+      paramTypes: ["address", "uint256"],
+      stateMutability: "nonpayable",
+      category: "approval",
+    },
+
+    mint: {
+      selector: "0x40c10f19",
+      name: "mint(address,uint256)",
+      paramTypes: ["address", "uint256"],
+      stateMutability: "nonpayable",
+      category: "mint",
+    },
+    burn: {
+      selector: "0x42966c68",
+      name: "burn(uint256)",
+      paramTypes: ["uint256"],
+      stateMutability: "nonpayable",
+      category: "burn",
+    },
+    burnFrom: {
+      selector: "0x79cc6790",
+      name: "burnFrom(address,uint256)",
+      paramTypes: ["address", "uint256"],
+      stateMutability: "nonpayable",
+      category: "burn",
+    },
+
+    pause: {
+      selector: "0x8456cb59",
+      name: "pause()",
+      paramTypes: [],
+      stateMutability: "nonpayable",
+      category: "admin",
+    },
+    unpause: {
+      selector: "0x3f4ba83a",
+      name: "unpause()",
+      paramTypes: [],
+      stateMutability: "nonpayable",
+      category: "admin",
+    },
+    paused: {
+      selector: "0x5c975abb",
+      name: "paused()",
+      paramTypes: [],
+      returnType: "bool",
+      stateMutability: "view",
+      category: "view",
+    },
+
+    transferWithAuthorization: {
+      selector: "0xe3ee160e",
+      name: "transferWithAuthorization(address,address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32)",
+      paramTypes: [
+        "address",
+        "address",
+        "uint256",
+        "uint256",
+        "uint256",
+        "bytes32",
+        "uint8",
+        "bytes32",
+        "bytes32",
+      ],
+      stateMutability: "nonpayable",
+      category: "transfer",
+    },
+    receiveWithAuthorization: {
+      selector: "0xef55bec6",
+      name: "receiveWithAuthorization(address,address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32)",
+      paramTypes: [
+        "address",
+        "address",
+        "uint256",
+        "uint256",
+        "uint256",
+        "bytes32",
+        "uint8",
+        "bytes32",
+        "bytes32",
+      ],
+      stateMutability: "nonpayable",
+      category: "transfer",
+    },
+    permit: {
+      selector: "0xd505accf",
+      name: "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
+      paramTypes: [
+        "address",
+        "address",
+        "uint256",
+        "uint256",
+        "uint8",
+        "bytes32",
+        "bytes32",
+      ],
+      stateMutability: "nonpayable",
+      category: "approval",
+    },
+    nonces: {
+      selector: "0x7ecebe00",
+      name: "nonces(address)",
+      paramTypes: ["address"],
+      returnType: "uint256",
+      stateMutability: "view",
+      category: "view",
+    },
+    DOMAIN_SEPARATOR: {
+      selector: "0x3644e515",
+      name: "DOMAIN_SEPARATOR()",
+      paramTypes: [],
+      returnType: "bytes32",
+      stateMutability: "view",
+      category: "view",
+    },
+  },
+
+  events: {
+    Transfer: {
+      topic:
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+      name: "Transfer",
+      inputs: [
+        { name: "from", type: "address", indexed: true },
+        { name: "to", type: "address", indexed: true },
+        { name: "value", type: "uint256", indexed: false },
+      ],
+    },
+    Approval: {
+      topic:
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925",
+      name: "Approval",
+      inputs: [
+        { name: "owner", type: "address", indexed: true },
+        { name: "spender", type: "address", indexed: true },
+        { name: "value", type: "uint256", indexed: false },
+      ],
+    },
+    AuthorizationUsed: {
+      topic:
+        "0x98de503528ee59b575ef0c0a2576a82497bfc029a5685b209e9ec333479b10a5",
+      name: "AuthorizationUsed",
+      inputs: [
+        { name: "authorizer", type: "address", indexed: true },
+        { name: "nonce", type: "bytes32", indexed: true },
+      ],
+    },
+  },
+};

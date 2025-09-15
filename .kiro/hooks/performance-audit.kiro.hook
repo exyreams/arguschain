@@ -1,0 +1,16 @@
+{
+  "enabled": false,
+  "name": "Performance Checker",
+  "description": "Ensures components meet Arguschain performance requirements",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/components/**/*.tsx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Check for performance issues: missing React.memo for expensive components, virtualization requirement for datasets >1000 items using @tanstack/react-virtual, proper loading states for operations >200ms with skeleton UI, lazy loading for non-critical components with React.lazy(), and efficient re-rendering patterns. Ensure TanStack Query is configured with 5-minute stale time and proper error handling."
+  }
+}

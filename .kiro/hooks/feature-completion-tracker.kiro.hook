@@ -1,0 +1,16 @@
+{
+  "enabled": false,
+  "name": "Feature Progress Tracker",
+  "description": "Ensures proper integration of new features across the application",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "src/components/**/*.tsx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Check if new components need corresponding entries in navigation (src/components/layout/Navbar.tsx), routing (src/App.tsx), and feature documentation. Ensure proper integration with existing features, barrel exports in index.ts files, and consistent design system usage. Verify error boundaries are implemented and loading states are properly handled."
+  }
+}

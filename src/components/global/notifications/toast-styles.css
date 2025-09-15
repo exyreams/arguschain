@@ -1,0 +1,16 @@
+/* Only essential toast styling */
+[data-sonner-toast] [data-title] {
+  color: #00d4ff !important;
+}
+
+[data-sonner-toast] [data-icon] {
+  color: #00d4ff !important;
+}
+
+[data-sonner-toast] svg {
+  color: #00d4ff !important;
+}
+
+[data-sonner-toast] .lucide {
+  color: #00d4ff !important;
+}

@@ -1,0 +1,16 @@
+{
+  "enabled": false,
+  "name": "Error Boundary Checker",
+  "description": "Ensures robust error handling across all components",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "src/components/**/*.tsx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Ensure all async components and data-fetching components are wrapped with proper error boundaries. Verify user-friendly error messages are provided for blockchain-specific errors (network failures, invalid transactions, RPC timeouts). Check that error states include actionable recovery options and maintain application stability."
+  }
+}

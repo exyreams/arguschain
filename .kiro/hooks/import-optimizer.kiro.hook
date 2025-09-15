@@ -1,0 +1,17 @@
+{
+  "enabled": false,
+  "name": "Import Optimizer",
+  "description": "Enforces proper import order and prevents direct shadcn/ui imports",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.tsx",
+      "src/**/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Check and fix import order following Arguschain standards: 1) External libraries (React, TanStack Query), 2) Internal utilities (cn from @/lib/utils), 3) UI components from @/components/global (NEVER @/components/ui), 4) Domain components, 5) Hooks and services, 6) Types (always last). Remove unused imports and ensure no direct shadcn/ui imports exist."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "README Updater",
+  "description": "Automatically updates README.md with new features and changes",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "src/components/**/*.tsx",
+      "src/lib/**/*.ts",
+      "src/hooks/**/*.ts",
+      "package.json"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analyze recent changes and update README.md to reflect new features, components, or capabilities. Maintain the comprehensive feature list, update technology stack if new dependencies were added, refresh installation and usage instructions if needed, and ensure the project description accurately represents the current scope and capabilities of Arguschain. Keep the professional tone and enterprise-grade positioning."
+  }
+}

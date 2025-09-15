@@ -1,0 +1,16 @@
+{
+  "enabled": false,
+  "name": "Component Standards Check",
+  "description": "Verifies components follow Arguschain architectural standards and best practices",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "src/components/**/*.tsx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Verify component follows Arguschain standards: proper imports from @/components/global (never direct shadcn/ui imports), accessibility attributes (ARIA labels, keyboard navigation), TypeScript interfaces with proper props, error boundaries for async operations, and performance optimization (React.memo for expensive components). Ensure component uses cn() utility for conditional classes and follows the established variant/size pattern."
+  }
+}
