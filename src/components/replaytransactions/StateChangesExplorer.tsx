@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Badge, Button, Input } from "@/components/global";
 import {
@@ -12,13 +12,14 @@ import {
   Eye,
   EyeOff,
   Filter,
+  List,
   Minus,
   Search,
   Shield,
   TrendingDown,
   TrendingUp,
 } from "lucide-react";
-import { FixedSizeList as List } from "react-window";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import type {
   ProcessedReplayData,
   StorageInterpretation,
@@ -306,14 +307,21 @@ export const StateChangesExplorer: React.FC<StateChangesExplorerProps> = ({
     URL.revokeObjectURL(url);
   }, [filteredAndSortedChanges]);
 
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const virtualizer = useVirtualizer({
+    count: filteredAndSortedChanges.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => ITEM_HEIGHT,
+  });
+
   const StateChangeRow = useCallback(
-    ({ index, style }: { index: number; style: React.CSSProperties }) => {
+    ({ index }: { index: number }) => {
       const change = filteredAndSortedChanges[index];
       const isSelected = selectedItems.has(change.id);
 
       return (
         <div
-          style={style}
           className={cn(
             "flex items-center space-x-4 p-4 border-b hover:bg-accent/50 cursor-pointer transition-colors",
             isSelected && "bg-accent"
@@ -681,17 +689,37 @@ export const StateChangesExplorer: React.FC<StateChangesExplorerProps> = ({
             </p>
           </div>
         ) : (
-          <List
-            height={
-              ITEM_HEIGHT *
-              Math.min(VISIBLE_ITEMS, filteredAndSortedChanges.length)
-            }
-            itemCount={filteredAndSortedChanges.length}
-            itemSize={ITEM_HEIGHT}
-            itemData={filteredAndSortedChanges}
+          <div
+            ref={parentRef}
+            className="overflow-auto"
+            style={{
+              height: `${ITEM_HEIGHT * Math.min(VISIBLE_ITEMS, filteredAndSortedChanges.length)}px`,
+            }}
           >
-            {StateChangeRow}
-          </List>
+            <div
+              style={{
+                height: `${virtualizer.getTotalSize()}px`,
+                width: "100%",
+                position: "relative",
+              }}
+            >
+              {virtualizer.getVirtualItems().map((virtualItem) => (
+                <div
+                  key={virtualItem.key}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: `${virtualItem.size}px`,
+                    transform: `translateY(${virtualItem.start}px)`,
+                  }}
+                >
+                  <StateChangeRow index={virtualItem.index} />
+                </div>
+              ))}
+            </div>
+          </div>
         )}
       </div>
 
