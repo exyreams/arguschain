@@ -17,7 +17,6 @@ import { AuthPrompt } from "@/components/auth";
 // Core components - loaded immediately
 import {
   QueryControls,
-  StatisticsPanel,
   ErrorMessage,
   useEnhancedErrorHandling,
 } from "@/components/eventlogs";
@@ -45,6 +44,12 @@ import {
 } from "lucide-react";
 
 // Lazy loaded components - loaded only when needed
+const StatisticsPanel = lazy(() =>
+  import("@/components/eventlogs/StatisticsPanel").then((module) => ({
+    default: module.StatisticsPanel,
+  }))
+);
+
 const ParticipantTables = lazy(() =>
   import("@/components/eventlogs/ParticipantTables").then((module) => ({
     default: module.ParticipantTables,

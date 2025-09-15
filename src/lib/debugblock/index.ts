@@ -19,5 +19,4 @@ export { DebugBlockExportUtils } from "./exportUtils";
 export { AdvancedAnalyticsEngine } from "./advancedAnalytics";
 export type { AdvancedAnalyticsResult } from "./advancedAnalytics";
 
-// Bookmark utilities
-export * from "./bookmarks";
+// Bookmark utilities - import directly to avoid bundling conflicts

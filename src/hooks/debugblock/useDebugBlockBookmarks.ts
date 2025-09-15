@@ -6,7 +6,10 @@ import type {
   CreateDebugBlockBookmarkData,
   UpdateDebugBlockBookmarkData,
 } from "@/lib/debugblock/bookmarks";
-import { DebugBlockBookmarksService } from "@/lib/debugblock/bookmarks";
+import {
+  DebugBlockBookmarksService,
+  DebugBlockBookmarkUtils,
+} from "@/lib/debugblock/bookmarks";
 
 // Query keys
 const QUERY_KEYS = {
@@ -249,9 +252,6 @@ export function useExportDebugBlockBookmarks() {
         throw new Error("No bookmarks to export");
       }
 
-      const { DebugBlockBookmarkUtils } = await import(
-        "@/lib/debugblock/bookmarks"
-      );
       const exportData = DebugBlockBookmarkUtils.exportBookmarks(
         bookmarks,
         format

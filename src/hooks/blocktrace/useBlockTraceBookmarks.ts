@@ -7,7 +7,10 @@ import type {
   UpdateBlockTraceBookmarkData,
 } from "@/lib/blocktrace/bookmarks";
 
-import { BlockTraceBookmarksService } from "@/lib/blocktrace/bookmarks";
+import {
+  BlockTraceBookmarksService,
+  BlockTraceBookmarkUtils,
+} from "@/lib/blocktrace/bookmarks";
 
 // Query keys
 const QUERY_KEYS = {
@@ -250,9 +253,6 @@ export function useExportBlockTraceBookmarks() {
         throw new Error("No bookmarks to export");
       }
 
-      const { BlockTraceBookmarkUtils } = await import(
-        "@/lib/blocktrace/bookmarks"
-      );
       const exportData = BlockTraceBookmarkUtils.exportBookmarks(
         bookmarks,
         format

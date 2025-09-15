@@ -2,7 +2,6 @@ export { TransferAnalytics } from "./TransferAnalytics";
 export { ExportButton } from "./ExportButton";
 export { ChartContainer } from "./ChartContainer";
 export { BookmarkManager } from "./BookmarkManager";
-export { StatisticsPanel } from "./StatisticsPanel";
 export { ParticipantTables } from "./ParticipantTables";
 export { VirtualizedParticipantTable } from "./VirtualizedParticipantTable";
 export { AccessibleLogsChart } from "./AccessibleLogsChart";
