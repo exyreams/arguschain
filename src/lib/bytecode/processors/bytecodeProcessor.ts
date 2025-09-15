@@ -32,7 +32,6 @@ export const PROXY_SIGNATURES = {
   "0x3659cfe6": "upgradeTo(address)",
   "0x4f1ef286": "upgradeToAndCall(address,bytes)",
   "0xf851a440": "admin()",
-  "0x3659cfe6": "upgradeTo(address)",
 };
 
 export const SECURITY_SIGNATURES = {
@@ -132,7 +131,7 @@ export class BytecodeProcessor {
   analyzeBytecode(
     bytecode: string,
     address: string,
-    contractName?: string,
+    contractName?: string
   ): BytecodeAnalysis {
     const code = bytecode.startsWith("0x") ? bytecode.slice(2) : bytecode;
     const size = code.length / 2;
@@ -156,11 +155,11 @@ export class BytecodeProcessor {
 
     const enhancedFunctions = this.mergeDetectedFunctions(
       detectedFunctions,
-      patternAnalysis.detectedPatterns,
+      patternAnalysis.detectedPatterns
     );
 
     const enhancedStandards = patternAnalysis.standardsCompliance.map(
-      (s) => s.standard,
+      (s) => s.standard
     );
     const finalStandards = [...new Set([...standards, ...enhancedStandards])];
 
@@ -265,7 +264,7 @@ export class BytecodeProcessor {
         acc[func.category] = (acc[func.category] || 0) + 1;
         return acc;
       },
-      {} as Record<string, number>,
+      {} as Record<string, number>
     );
 
     if (categories.ERC20 >= 5) standards.push("ERC20");
@@ -276,7 +275,7 @@ export class BytecodeProcessor {
 
   private detectPatterns(
     code: string,
-    functions: DetectedFunction[],
+    functions: DetectedFunction[]
   ): string[] {
     const patterns: string[] = [];
 
@@ -297,7 +296,7 @@ export class BytecodeProcessor {
     features: string[];
   } {
     const securityFunctions = functions.filter(
-      (f) => f.category === "Security",
+      (f) => f.category === "Security"
     );
     const features = securityFunctions.map((f) => f.name);
 
@@ -309,7 +308,7 @@ export class BytecodeProcessor {
 
   private analyzeProxy(
     functions: DetectedFunction[],
-    code: string,
+    code: string
   ): {
     isProxy: boolean;
     type?: string;
@@ -350,7 +349,7 @@ export class BytecodeProcessor {
 
   private estimateComplexity(
     size: number,
-    functionCount: number,
+    functionCount: number
   ): {
     estimate: number;
     level: "Low" | "Medium" | "High";
@@ -367,13 +366,13 @@ export class BytecodeProcessor {
 
   private calculateSimilarity(
     contractA: BytecodeAnalysis,
-    contractB: BytecodeAnalysis,
+    contractB: BytecodeAnalysis
   ): SimilarityMetric {
     const signaturesA = new Set(contractA.functions.map((f) => f.signature));
     const signaturesB = new Set(contractB.functions.map((f) => f.signature));
 
     const intersection = new Set(
-      [...signaturesA].filter((x) => signaturesB.has(x)),
+      [...signaturesA].filter((x) => signaturesB.has(x))
     );
     const union = new Set([...signaturesA, ...signaturesB]);
 
@@ -391,7 +390,7 @@ export class BytecodeProcessor {
 
   private detectRelationship(
     contractA: BytecodeAnalysis,
-    contractB: BytecodeAnalysis,
+    contractB: BytecodeAnalysis
   ): ContractRelationship | null {
     if (
       contractA.proxy.isProxy &&
@@ -434,7 +433,7 @@ export class BytecodeProcessor {
 
   private mergeDetectedFunctions(
     legacyFunctions: DetectedFunction[],
-    enhancedPatterns: any[],
+    enhancedPatterns: any[]
   ): DetectedFunction[] {
     const functionMap = new Map<string, DetectedFunction>();
 
@@ -451,7 +450,7 @@ export class BytecodeProcessor {
     });
 
     return Array.from(functionMap.values()).sort((a, b) =>
-      a.category.localeCompare(b.category),
+      a.category.localeCompare(b.category)
     );
   }
 

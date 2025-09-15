@@ -54,14 +54,8 @@ export const ENHANCED_PROXY_SIGNATURES = {
   "0x4f1ef286": "upgradeToAndCall(address,bytes)",
   "0xf851a440": "admin()",
   "0x8f283970": "changeAdmin(address)",
-
   "0x52d1902d": "proxiableUUID()",
-  "0x3659cfe6": "upgradeTo(address)",
-  "0x4f1ef286": "upgradeToAndCall(address,bytes)",
-
-  "0x5c60da1b": "implementation()",
   "0xa3f4df7e": "beacon()",
-
   "0xcdffacc6": "facetAddress(bytes4)",
   "0x52ef6b2c": "facetAddresses()",
   "0xadfca15e": "facetFunctionSelectors(address)",
@@ -179,7 +173,7 @@ export class EnhancedPatternDetector {
   private mapSignatures(
     signatures: Record<string, string>,
     category: string,
-    metadata?: any,
+    metadata?: any
   ): Record<string, { name: string; category: string; metadata?: any }> {
     const mapped: Record<
       string,
@@ -241,18 +235,18 @@ export class EnhancedPatternDetector {
 
     const complexityScore = this.calculateComplexityScore(
       bytecode,
-      detectedPatterns,
+      detectedPatterns
     );
 
     const gasOptimizationFeatures = this.detectGasOptimizations(
       detectedPatterns,
-      bytecode,
+      bytecode
     );
 
     return {
       totalSignatures: signatures.length,
       detectedPatterns: detectedPatterns.sort(
-        (a, b) => b.confidence - a.confidence,
+        (a, b) => b.confidence - a.confidence
       ),
       standardsCompliance,
       securityFeatures,
@@ -321,7 +315,7 @@ export class EnhancedPatternDetector {
     return standards
       .map((standard) => {
         const requiredFound = standard.required.filter((sig) =>
-          detectedSigs.has(sig),
+          detectedSigs.has(sig)
         );
         const compliance = requiredFound.length / standard.required.length;
 
@@ -361,7 +355,7 @@ export class EnhancedPatternDetector {
 
   private detectProxyType(
     patterns: PatternDetectionResult[],
-    bytecode: string,
+    bytecode: string
   ): string | undefined {
     const proxyPatterns = patterns.filter((p) => p.category === "Proxy");
 
@@ -390,7 +384,7 @@ export class EnhancedPatternDetector {
 
   private calculateComplexityScore(
     bytecode: string,
-    patterns: PatternDetectionResult[],
+    patterns: PatternDetectionResult[]
   ): number {
     const size = (bytecode.length - 2) / 2;
     const functionCount = patterns.length;
@@ -410,7 +404,7 @@ export class EnhancedPatternDetector {
 
   private detectGasOptimizations(
     patterns: PatternDetectionResult[],
-    bytecode: string,
+    bytecode: string
   ): string[] {
     const optimizations: string[] = [];
     const code = bytecode.toLowerCase();
